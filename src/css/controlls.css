@@ -1,0 +1,28 @@
+.controlls {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    transition: opacity 0.2s ease-in-out;
+
+    background-color: var(--b);
+    color: var(--c);
+
+    overflow: scroll;
+}
+
+.controlls::-webkit-scrollbar {
+    display: none;
+}
+
+.controlls.focused {
+    opacity: 1;
+}
+
+.controlls:not(.focused) {
+    opacity: 0;
+    pointer-events: none;
+}
