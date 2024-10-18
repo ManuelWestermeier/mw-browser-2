@@ -1,7 +1,7 @@
 const defaultData = {
     tabs: [
         ["https://manuelwestermeier.github.io/fsRch/", null],
-        ["https://www.youtube.com/@TAGESSCHATTEN", null],
+        ["https://www.youtube.com/", null],
         ["https://manuelwestermeier.github.io/memory_game", null]
     ], searchEngine: "https://manuelwestermeier.github.io/fsRch/",
     currentTabIndex: 0

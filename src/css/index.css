@@ -30,8 +30,16 @@ input {
   color: var(--p);
   border: 2px solid var(--p);
   border-radius: 2px;
+  transition: all 0.1s ease-in-out;
 }
 
 button {
   cursor: pointer;
+}
+
+button:focus,
+input:focus {
+  transform: scale(1.1);
+  border: 2px solid var(--a);
+  color: var(--a);
 }
