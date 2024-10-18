@@ -3,7 +3,8 @@ const defaultData = {
         ["https://manuelwestermeier.github.io/fsRch/", null],
         ["https://www.youtube.com/@TAGESSCHATTEN", null],
         ["https://manuelwestermeier.github.io/memory_game", null]
-    ], searchEngine: "https://manuelwestermeier.github.io/fsRch/"
+    ], searchEngine: "https://manuelwestermeier.github.io/fsRch/",
+    currentTabIndex: 0
 }
 
 function getData() {

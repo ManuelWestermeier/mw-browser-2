@@ -1,9 +1,14 @@
+const getCurrentTabIndex = require("./js/get-current-tab-index.js")
 // html elems
-const { controllsElem, webViewsElem } = require("./js/elems.js")
+const { webViewsElem } = require("./js/elems.js")
 //app state data
 const data = require("./js/data.js")
 // toggle menu
 require("./js/key-down.js")
+
+webViewsElem.onscroll = () => {
+    data.currentTabIndex = getCurrentTabIndex()
+}
 
 function createWebview([url = data.searchEngine, metaData = null]) {
     const webviewElem = document.createElement("webview")
