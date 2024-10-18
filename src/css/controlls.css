@@ -32,6 +32,21 @@
     padding: 5px;
     border-radius: 5px;
     border: 2px solid var(--p);
+    position: relative;
+}
+
+.controlls .tabs .tab .controll {
+    position: absolute;
+    top: -25px;
+    left: 5px;
+}
+
+.controlls .tabs .tab .controll button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    margin: 0;
+    padding: 2px;
 }
 
 .controlls .tabs .tab.focused {
