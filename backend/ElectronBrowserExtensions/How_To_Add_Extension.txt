@@ -1,0 +1,6 @@
+
+                1. Create a folder in this directory.
+                2. Create a manifest.json file in the new folder.
+                3. Learn more at: https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/
+                4. Have fun!
+                

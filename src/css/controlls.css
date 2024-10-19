@@ -28,11 +28,17 @@
 }
 
 .controlls .tabs .tab {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
     margin: 5px;
     padding: 5px;
+    height: 34px;
+
     border-radius: 5px;
     border: 2px solid var(--p);
-    position: relative;
 }
 
 .controlls .tabs .tab .controll {
@@ -46,7 +52,24 @@
     height: 34px;
     border-radius: 50%;
     margin: 0;
-    padding: 2px;
+    padding: 3px;
+}
+
+.controlls .tabs .tab>button {
+    position: absolute;
+    top: -25px;
+    right: 5px;
+
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    padding: 3px;
+    margin: 0;
+}
+
+
+.controlls .tabs .tab:not(.focused)>input {
+    opacity: 0;
 }
 
 .controlls .tabs .tab.focused {

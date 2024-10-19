@@ -52,3 +52,5 @@ function renderAllWebViewFromStart() {
 }
 
 renderAllWebViewFromStart()
+
+console.log("prototype: ", Object.getPrototypeOf(document.createElement("webview")));

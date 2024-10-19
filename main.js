@@ -1,8 +1,9 @@
-const { app, BrowserWindow, globalShortcut } = require('electron');
+const { app, BrowserWindow, globalShortcut, session } = require('electron');
 const path = require('node:path');
+const loadExtensions = require('./backend/load-extensions');
 
 const createWindow = () => {
-  // Create the browser window.
+  // Create the main browser window
   const mainWindow = new BrowserWindow({
     width: 1500,
     height: 1000,
@@ -15,36 +16,39 @@ const createWindow = () => {
     },
   });
 
-  // Load the index.html of the app.
+  // Load the index.html file
   mainWindow.loadFile(path.join(__dirname, 'src', 'index.html'));
 
-  // Maximize & focus
+  // Maximize and focus the window
   mainWindow.maximize();
   mainWindow.focus();
 
-  mainWindow.on("focus", () => {
+  // Register global shortcut when window is focused
+  mainWindow.on('focus', () => {
     globalShortcut.register('Control+Tab', () => {
-      mainWindow.webContents.send('KeyDown::Control+Tab', "");
+      mainWindow.webContents.send('KeyDown::Control+Tab', '');
     });
-  })
+  });
 
-  mainWindow.on("blur", () => {
-    // Unregister all global shortcuts when the app quits.
-    globalShortcut.unregisterAll()
-  })
+  // Unregister all global shortcuts when the window loses focus
+  mainWindow.on('blur', () => {
+    globalShortcut.unregisterAll();
+  });
 
-  // Open the DevTools if needed
+  // Open DevTools if necessary (uncomment for debugging)
   // mainWindow.webContents.openDevTools();
 };
 
+// Unregister all global shortcuts when the app quits
 app.on('will-quit', () => {
-  // Unregister all global shortcuts when the app quits.
   globalShortcut.unregisterAll();
 });
 
 app.whenReady().then(() => {
+  loadExtensions();
   createWindow();
-  // On macOS, re-create a window when the dock icon is clicked and there are no other windows open.
+
+  // On macOS, re-create the window when the dock icon is clicked
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -52,7 +56,7 @@ app.whenReady().then(() => {
   });
 });
 
-// Quit when all windows are closed, except on macOS.
+// Quit the app when all windows are closed, except on macOS
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
