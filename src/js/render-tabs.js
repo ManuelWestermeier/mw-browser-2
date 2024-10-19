@@ -1,6 +1,7 @@
 const { tabsElem, webViewsElem, controllsElem } = require("./elems.js")
 const data = require("./data.js")
 const getCurrentTabIndex = require("./get-current-tab-index.js")
+const toUrl = require("./to-url.js")
 
 function openTab(index) {
     const tabElem = tabsElem.children[index]
@@ -24,8 +25,8 @@ function removeTab(index) {
     if (data.currentTabIndex == index && data.currentTabIndex >= 1) data.currentTabIndex--
     data.tabs.splice(index, 1);
     checkZeroTabs();
-    renderTabs();
     webViewsElem.removeChild(webViewsElem.childNodes[index]);
+    renderTabs();
 }
 
 function createTabElem([url = data.searchEngine, metaData = null], index) {
@@ -65,7 +66,13 @@ function createTabElem([url = data.searchEngine, metaData = null], index) {
     urlInputElem.value = webViewsElem.childNodes[index].getURL()
     urlInputElem.onblur = () => {
         if (urlInputElem.value != webViewsElem.childNodes[index].getURL()) {
-            webViewsElem.childNodes[index].loadURL(urlInputElem.value)
+            webViewsElem.childNodes[index].loadURL(
+                toUrl(urlInputElem.value)
+            )
+            console.log(
+                toUrl(urlInputElem.value)
+            );
+
             openTab(index)
         }
     }
