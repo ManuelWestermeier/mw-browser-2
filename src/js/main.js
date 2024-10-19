@@ -9,48 +9,22 @@ require("./js/key-down.js")
 webViewsElem.onscroll = () => {
     data.currentTabIndex = getCurrentTabIndex()
 }
-
+// Other supporting functions
 function createWebview([url = data.searchEngine, metaData = null]) {
-    const webviewElem = document.createElement("webview")
-
-    webviewElem.src = url
-
-    return webviewElem
-}
-
-function createNewTab(pos, tabData = [data.searchEngine, null]) {
-    //no items
-    if (pos < 0 || data.tabs.length == 0) {
-        data.tabs.push(tabData)
-        webViewsElem.append(createWebview(tabData))
-        return
-    }
-
-    if (webViewsElem.children.length == 0) {
-        webViewsElem.append(createWebview(tabData))
-        return
-    }
-
-    const refElem = webViewsElem.children[pos];
-    // Insert the new element before the element at position 2
-    webViewsElem.insertBefore(createWebview(tabData), refElem);
-}
-
-function checkZeroTabs() {
-    if (data.tabs.length == 0) {
-        const tabData = [data.searchEngine, null]
-        createNewTab(-1, tabData)
-    }
+    const webviewElem = document.createElement("webview");
+    webviewElem.src = url;
+    return webviewElem;
 }
 
 function renderAllWebViewFromStart() {
-    checkZeroTabs()
-    webViewsElem.innerHTML = ""
+    if (!data.tabs.length) data.tabs = [[data.searchEngine, null]];
+    webViewsElem.innerHTML = "";
     for (let index = 0; index < data.tabs.length; index++) {
-        createNewTab(index, data.tabs[index])
+        webViewsElem.append(createWebview(data.tabs[index]));
     }
 }
 
-renderAllWebViewFromStart()
+// Initial render
+renderAllWebViewFromStart();
 
 console.log("prototype: ", Object.getPrototypeOf(document.createElement("webview")));

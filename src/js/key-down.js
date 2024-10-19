@@ -18,31 +18,30 @@ ipcRenderer.on('KeyDown::Control+Tab', (event, message) => {
         tabElem.focus();
 });
 
+// Keydown event listener for tab switching
 window.addEventListener("keydown", e => {
-    if (e.key == "ArrowRight" || e.key == "ArrowLeft") {
-        if (document.activeElement.tagName == "INPUT") return
-        if (document.activeElement.tagName == "TEXTAREA") return
-        e.preventDefault()
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") return;
+        e.preventDefault();
 
-        const currentTabIndex = data.currentTabIndex
-        var index = currentTabIndex + (e.key == "ArrowLeft" ? -1 : 1)
+        const currentTabIndex = data.currentTabIndex;
+        let index = currentTabIndex + (e.key === "ArrowLeft" ? -1 : 1);
 
-        if (index == -1) {
-            index = tabsElem.children.length - 1
-        } else if (index == tabsElem.children.length) {
-            index = 0
+        if (index === -1) {
+            index = tabsElem.children.length - 1;
+        } else if (index === tabsElem.children.length) {
+            index = 0;
         }
 
-        const tabElem = tabsElem.children[index]
+        const tabElem = tabsElem.children[index];
 
         for (const tab of tabsElem.children) {
-            tab.classList.remove("focused")
+            tab.classList.remove("focused");
         }
 
-        tabElem.classList.add("focused")
-        tabElem.focus()
-
-        tabElem.scrollIntoView({ behavior: "smooth", block: "center" })
-        data.currentTabIndex = index
+        tabElem.classList.add("focused");
+        tabElem.focus();
+        tabElem.scrollIntoView({ behavior: "smooth", block: "center" });
+        data.currentTabIndex = index;
     }
-})
+});

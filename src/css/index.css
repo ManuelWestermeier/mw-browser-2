@@ -43,3 +43,7 @@ input:focus {
   border: 2px solid var(--a);
   color: var(--a);
 }
+
+::placeholder {
+  color: var(--c);
+}
