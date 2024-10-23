@@ -1,3 +1,5 @@
+const { webViewsElem } = require("./elems")
+
 const defaultData = {
     tabs: [
         ["https://manuelwestermeier.github.io/fsRch/", null],
@@ -37,6 +39,7 @@ const defaultData = {
     }
 }
 
+
 function getData() {
     const data = localStorage.getItem("browser-data")
 
@@ -48,4 +51,16 @@ function getData() {
     }
 }
 
-module.exports = getData()
+const data = getData()
+
+function saveData() {
+    data.tabs = data.tabs.map(([url, metaData], index) => [webViewsElem.children?.[index]?.src || url, metaData])
+    localStorage.setItem("browser-data", JSON.stringify(data))
+}
+
+window.onblur = saveData
+
+window.addEventListener("beforeunload", saveData)
+setInterval(saveData, 10_000)
+
+module.exports = data

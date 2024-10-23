@@ -47,6 +47,10 @@
     left: 5px;
 }
 
+.controlls .tabs .tab span {
+    cursor: pointer;
+}
+
 .controlls .tabs .tab .controll button {
     width: 34px;
     height: 34px;

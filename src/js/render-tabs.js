@@ -22,23 +22,6 @@ function openTab(index) {
     data.currentTabIndex = index;
 }
 
-function removeTab(index) {
-    // Remove the tab from the data
-    data.tabs.splice(index, 1);
-
-    // Remove the corresponding webview element
-    webViewsElem.removeChild(webViewsElem.children[index]);
-
-    data.currentTabIndex = getCurrentTabIndex();
-    // Re-render the tabs
-    if (data.tabs.length <= 0) {
-        openTab(0);
-        data.currentTabIndex = 0
-        renderAllWebViewFromStart()
-        webViewsElem.children.item(0).addEventListener("dom-ready", () => renderTabs())
-    } else renderTabs();
-}
-
 // Create a tab element
 function createTabElem([url = data.searchEngine, metaData = null], index) {
     const webview = webViewsElem.children[index];
@@ -143,5 +126,8 @@ function renderTabs() {
         tabsElem.append(tabElem);
     }
 }
+
+window.renderTabs = renderTabs
+window.openTab = openTab
 
 module.exports = { renderTabs };

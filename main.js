@@ -28,6 +28,18 @@ const createWindow = () => {
     globalShortcut.register('Control+Tab', () => {
       mainWindow.webContents.send('KeyDown::Control+Tab', '');
     });
+    globalShortcut.register('Control+T', () => {
+      mainWindow.webContents.send('KeyDown::Control+T', '');
+    });
+    globalShortcut.register('Control+W', () => {
+      mainWindow.webContents.send('KeyDown::Control+W', '');
+    });
+    globalShortcut.register('Ctrl+Left', () => {
+      mainWindow.webContents.send('KeyDown::Control+Left', '');
+    });
+    globalShortcut.register('Ctrl+Right', () => {
+      mainWindow.webContents.send('KeyDown::Control+Right', '');
+    });
   });
 
   // Unregister all global shortcuts when the window loses focus

@@ -18,6 +18,27 @@ ipcRenderer.on('KeyDown::Control+Tab', (event, message) => {
         tabElem.focus();
 });
 
+ipcRenderer.on('KeyDown::Control+T', (event, message) => {
+    addNewTab();
+});
+
+ipcRenderer.on('KeyDown::Control+W', (event, message) => {
+    removeTab(getCurrentTabIndex());
+});
+
+ipcRenderer.on('KeyDown::Control+Left', (event, message) => {
+    if (controllsElem.classList.contains("focused")) return
+
+    webViewsElem.children?.[data.currentTabIndex - 1]?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+});
+
+
+ipcRenderer.on('KeyDown::Control+Right', (event, message) => {
+    if (controllsElem.classList.contains("focused")) return
+
+    webViewsElem.children?.[data.currentTabIndex + 1]?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+});
+
 // Keydown event listener for tab switching
 window.addEventListener("keydown", e => {
     if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
@@ -34,6 +55,8 @@ window.addEventListener("keydown", e => {
         }
 
         const tabElem = tabsElem.children[index];
+
+        if (!tabElem) tabElem = tabsElem.children[0]
 
         for (const tab of tabsElem.children) {
             tab.classList.remove("focused");
